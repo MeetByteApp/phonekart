@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container bg-light my-5 p-5">
+    {% if orderConfirmed %}
+    <span class="display-4 mb-5 d-block">Order Confirmed! <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+            fill="#28a745" class="bi bi-check2-circle" viewBox="0 0 16 16">
+            <path
+                d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+            <path
+                d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+        </svg></span>
+    <div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <p class="text-muted display-5" id="exampleInputEmail1">{{ orderDetails['email']}}</p>
+        </div>
+        <div class="mb-3">
+            <label for="inputName" class="form-label">Name</label>
+            <p class="text-muted display-5" id="inputName">{{ orderDetails['name']}}</p>
+        </div>
+        <div class="mb-3">
+            <label for="inputPhone" class="form-label">Phone Number</label>
+            <p class="text-muted display-5" id="inputPhone">{{ orderDetails['phone']}}</p>
+        </div>
+        <div class="d-inline-flex gap-2 my-5">
+            <a href="/" class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button">
+                Continue Shopping
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <span class="display-4 mb-5 d-block">Confirm Your Order</span>
+    <form action="/confirm-order" method="POST">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="inputName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="inputName" name="name">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputPhone" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="inputPhone" name="phone">
+        </div>
+        <button type="submit" class="btn btn-primary">Confirm Order</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

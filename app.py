@@ -153,7 +153,21 @@ def update():
 def checkout():
     create_order()
     clear_cart()
-    return redirect('/')
+    return redirect('/confirm-order')
+
+
+@app.route("/confirm-order", methods=['GET', 'POST'])
+def confirm():
+    if request.method == 'POST':
+        print("Request Form Data:", request.form)
+        orderConfirmed = True
+        email = request.form.get('email')
+        name = request.form.get('name')
+        phone = request.form.get('phone')
+        orderDetails = {'email': email, 'name': name, 'phone': phone}
+        return render_template("order.html", orderConfirmed=orderConfirmed, orderDetails=orderDetails)
+    else:
+        return render_template("order.html")
 
 
 @app.route("/remove/", methods=["GET"])
