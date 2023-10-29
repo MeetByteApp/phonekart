@@ -17,9 +17,7 @@
             <img src="/static/images/{{ product['image']}}.webp" alt="" class="mr-5 object-fit-contain border rounded"
                 height="180px">
             <div>
-                <a href="{{ url_for('product', id=product['id']) }}">
-                    <h2>{{ product['name'] }}</h2>
-                </a>
+                <h2 class="text-primary">{{ product['name'] }}</h2>
                 <p>{{ product['description']}}</p>
                 <h4 class="card-text price" style="color:red; display:inline">{{'{:,.2f}'.format(product['price']) }}
                 </h4>
