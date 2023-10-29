@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row align-items-center">
+    <span class="display-4 my-5">{% block title %} Smartphones {% endblock %}</span>
+    <form class="ml-auto mr-2" action="/search" method="get">
+        <input class="form-control mr-2" type="search" placeholder="Search" name="q" aria-label="Search">
+    </form>
+    <a class="btn btn-primary position-relative" href="{{ url_for('cart') }}">
+        Cart <span class="badge rounded-pill bg-danger">{{ cartLen }}</span>
+    </a>
+</div>
+<div class="row">
+    {% for product in products %}
+    <div class="col-12 bg-light p-3 mb-5">
+        <div class="d-flex h-100">
+            <img src="/static/images/{{ product['image']}}.webp" alt="" class="mr-5 object-fit-contain border rounded"
+                height="180px">
+            <div>
+                <a href="{{ url_for('product', id=product['id']) }}">
+                    <h2>{{ product['name'] }}</h2>
+                </a>
+                <p>{{ product['description']}}</p>
+                <h4 class="card-text price" style="color:red; display:inline">{{'{:,.2f}'.format(product['price']) }}
+                </h4>
+                <div class="mt-3">
+                    <form action="/buy/" methods="POST">
+                        <input type="hidden" name="id" value="{{product['id']}}" />
+                        <input type="hidden" class="quantity" name="quantity" value='1' />
+                        <input type="submit" class="btn btn-primary addToCart" value="Add To Cart" /><br /><br />
+                    </form>
+                    <!-- <a class="btn btn-primary text-light">Add to cart</a> -->
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
